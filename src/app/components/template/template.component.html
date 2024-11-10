@@ -1,0 +1,110 @@
+<div class="container">
+  <div class="form-container">
+    <div class="form-header">Template Form</div>
+    <form #form="ngForm">
+      <div class="form-group">
+        <label for="firstName">First name</label>
+        <input
+          type="text"
+          [(ngModel)]="person.firstName"
+          id="firstName"
+          name="firstName"
+          #fName="ngModel"
+          required
+          minlength="8"
+        />
+        <div class="text-red">
+          @if( (fName.touched || fName.dirty) && fName.errors ?.['required']){
+          <span>This is required*</span>
+          } @else if ((fName.touched || fName.dirty)&&
+          fName.errors?.['minlength']) {
+          <span>Min 8 Charter</span>
+          }
+        </div>
+        <!-- <div>
+          {{ fName.errors | json }}
+        </div> -->
+      </div>
+      <div class="form-group">
+        <label for="lastName">Last name</label>
+        <input
+          type="text"
+          [(ngModel)]="person.lastName"
+          id="lastName"
+          name="lastName"
+          required
+          #lName="ngModel"
+        />
+        <div class="text-red">
+          @if( (lName.touched || lName.dirty) && lName.errors ?.['required']){
+          <span>This is required*</span>
+          }
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="username">Username</label>
+        <input
+          type="text"
+          [(ngModel)]="person.username"
+          id="username"
+          name="username"
+          required
+          #uName="ngModel"
+        />
+        <div class="text-red">
+          @if( (uName.touched || uName.dirty) && uName.errors ?.['required']){
+          <span>This is required*</span>
+          }
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="city">City</label>
+        <input type="text" [(ngModel)]="person.city" id="city" name="city" />
+      </div>
+      <div class="form-group">
+        <label for="state">State</label>
+        <select id="state" [(ngModel)]="person.state" name="state">
+          <option value="">Choose...</option>
+          <option value="state1">Dinajpur</option>
+          <option value="state2">Madaripur</option>
+          <option value="state2">Dhaka</option>
+          <!-- Add more states as needed -->
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="zip">Zip</label>
+        <input type="text" [(ngModel)]="person.zipCode" id="zip" name="zip" />
+      </div>
+      <div class="form-group">
+        <input
+          type="checkbox"
+          [(ngModel)]="person.isAccept"
+          id="terms"
+          name="terms"
+          required
+          #agree="ngModel"
+        />
+
+        <label for="terms">Agree to terms and conditions</label>
+        <div class="text-red">
+          @if((agree.touched || agree.dirty) && agree.errors ?.['required']){
+          <span>Required*</span>
+          }
+        </div>
+      </div>
+      <div class="form-actions">
+        <!-- {{ form.invalid }} -->
+        <button type="reset" class="btn-reset">Reset form</button>
+        <button
+          type="submit"
+          [disabled]="form.invalid"
+          (click)="onSubmit()"
+          class="btn-submit"
+        >
+          Submit
+        </button>
+        {{ fromValue | json }}
+      </div>
+    </form>
+  </div>
+</div>
